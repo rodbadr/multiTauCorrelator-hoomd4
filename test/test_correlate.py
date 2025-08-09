@@ -38,7 +38,8 @@ FILENAME = "corr_otf_test.txt"
 
 # method to separate the pressure tensor into its components and make them available as loggable quantities
 class separatePressureTensor(hoomd.custom.Action):
-
+    
+    # Indicate that this action will access the pressure tensor
     flags = [Action.Flags.PRESSURE_TENSOR]
 
     @log
