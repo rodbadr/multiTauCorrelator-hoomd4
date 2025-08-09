@@ -35,7 +35,8 @@ class separatePressureTensor(hoomd.custom.Action):
     The difference between the diagonal components Nab is also calculated.
     This is useful for stress relaxation function calculations.
     """
-
+    
+    # Indicate that this action will access the pressure tensor
     flags = [Action.Flags.PRESSURE_TENSOR]
 
     @log
