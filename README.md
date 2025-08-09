@@ -9,7 +9,7 @@ The multiTauCorrelator Custom Action for HOOMD-blue v4 provides on-the-fly time 
 To use this Custom Action, clone the repository into the directory of choice then build and install it as follows:
 
     git clone https://github.com/rodbadr/multiTauCorrelator-hoomd4.git
-    cd correlator-hoomd-plugin
+    cd multiTauCorrelator-hoomd4
     cmake -B build/correlator_plugin/
     cmake --build build/correlator_plugin/
     cmake --install build/correlator_plugin/
