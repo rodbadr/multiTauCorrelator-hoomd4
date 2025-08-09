@@ -9,6 +9,11 @@ from hoomd.util import _dict_flatten
 
 class autocorrelate(Action):
 
+    # Indicate that this action will access the pressure tensor
+    # (I do not understand fully why, but removing this line
+    #  causes the custom action not to work anymore, although
+    #  we do not really access the pressure tensor directly in
+    #  it)
     flags = [Action.Flags.PRESSURE_TENSOR]
 
     def __init__(self, quantities: list, logger: hoomd.logging.Logger, filename: str = "autocorrelate.log", eval_period: int = 0, numcorrin: int = 32, p_in: int = 16, m_in: int = 2, normalize: bool = False):
