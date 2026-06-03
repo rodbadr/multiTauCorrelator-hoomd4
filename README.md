@@ -1,3 +1,12 @@
+### Call for contributions:
+If interested please contact me or sikmply create a fork and then pull request.
+
+- Implementation of a method and example to calculate mean-square displacements through the HOOMD-4+ API
+- Development of a routine that would allow for resuming simulations if for example they die or need to be extended for longer times
+- Creating a new release for later version of HOOMD and accomodating any changes in the API.
+
+
+
 # On-the-fly autocorrelation for HOOMD-blue version 4
 
 ## About
