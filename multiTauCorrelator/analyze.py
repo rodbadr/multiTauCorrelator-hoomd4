@@ -76,21 +76,42 @@ class autocorrelate(Action):
 
             # loop over the quantities in the list and create a correlator for each
             for quantity in self.quantities:
-                if quantity not in logger_keys: # check if the quantity is in the logger
-                    raise ValueError(f"Quantity '{quantity}' not found in logger keys.")
 
-                # Create a correlator for the quantity (Correlator_Likh object from the C++ module)
-                self.m_corr.append(_multiTauCorrelator.Correlator_Likh(self.numcorrin, self.p_in, self.m_in))
-                # Initialize the correlator with zero values. This sets up the correlator to be ready for adding values
+                if isinstance(quantity, tuple):
+                    if len(quantity) != 2:
+                        raise ValueError("Cross-correlation tuple must have length 2.")
+
+                    q1, q2 = quantity
+
+                    if q1 not in logger_keys:
+                        raise ValueError(f"Quantity '{q1}' not found in logger keys.")
+                    if q2 not in logger_keys:
+                        raise ValueError(f"Quantity '{q2}' not found in logger keys.")
+
+                else:
+                    if quantity not in logger_keys:
+                        raise ValueError(f"Quantity '{quantity}' not found in logger keys.")
+
+                self.m_corr.append(
+                    _multiTauCorrelator.Correlator_Likh(
+                        self.numcorrin,
+                        self.p_in,
+                        self.m_in
+                    )
+                )
                 self.m_corr[-1].initialize()
 
-
         for i, quantity in enumerate(self.quantities):
-            # Get the value of the quantity from the logger
-            value = self._get_quantity_value(quantity)
-            # Add the value to the correlator
-            # add() is defined in the C++ module `correlator_likh.cc` and was exposed to Python via pybind11
-            self.m_corr[i].add(value)
+
+            if isinstance(quantity, tuple):
+                q1, q2 = quantity
+                value1 = self._get_quantity_value(q1)
+                value2 = self._get_quantity_value(q2)
+                self.m_corr[i].add(value1, value2)
+
+            else:
+                value = self._get_quantity_value(quantity)
+                self.m_corr[i].add(value, value)
 
         if (self.eval_period == 0):
             return

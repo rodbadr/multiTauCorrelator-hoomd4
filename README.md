@@ -118,9 +118,9 @@ langevin = hoomd.md.methods.Langevin(filter=hoomd.filter.All(), kT=1.0)
 integrator.methods.append(langevin)
 sim.operations.integrator = integrator
 
-# Create the autocorrelate Custom Action object for pressure
+# Create the autocorrelate Custom Action object for pressure or a cross correlation
 corr = autocorrelate(
-    filename='correlate.log', quantities=['pressure'], logger=logger
+    filename='correlate.log', quantities=['pressure',('pressure','pressure')], logger=logger
 )
 
 # Add the correlator to the simulation writers so it runs every step

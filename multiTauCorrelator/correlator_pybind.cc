@@ -7,7 +7,7 @@ void export_Correlator(pybind11::module& m) {
   pybind11::class_<Correlator_Likh>(m, "Correlator_Likh")
         .def(pybind11::init<int, int, int>())
         .def("initialize", &Correlator_Likh::initialize)
-        .def("add", &Correlator_Likh::add, pybind11::arg("w"), pybind11::arg("k") = 0)
+        .def("add", &Correlator_Likh::add, pybind11::arg("wA"), pybind11::arg("wB"), pybind11::arg("k") = 0)
         .def("evaluate", &Correlator_Likh::evaluate, pybind11::arg("norm") = false)
         .def_property_readonly("npcorr", [](const Correlator_Likh& self) { return self.npcorr; })
         .def_property_readonly("t", [](const Correlator_Likh& self) {

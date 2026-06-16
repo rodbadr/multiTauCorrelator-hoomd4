@@ -4,9 +4,8 @@
 
 
 int main(int argc, char *argv[]) {
-  if (argc < 2) {
-    std::cout << "Usage:" << std::endl
-              << "Program INPUT_FILE OUTPUT_FILE" << std::endl;
+  if (argc < 3) {
+    std::cout << "Usage:\nProgram INPUT_FILE OUTPUT_FILE\n";
     return 1;
   }
 
@@ -23,7 +22,7 @@ int main(int argc, char *argv[]) {
   }
   while (!fin.eof()) {
     fin >> val;
-    c.add(val);
+    c.add(val, val, 0);
   }
   fin.close();
 
